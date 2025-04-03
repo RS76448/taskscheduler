@@ -21,7 +21,8 @@ class RedisService {
   }
   async createredisclient() {
     const client = Redis.createClient({
-      url: 'redis://redis:6379'
+      url: process.env.REDISCLOUD_URL
+      // url:process.env.REDIS_URL || 'redis://redis:6379',
     });
     
   console.log("client=====>",{ host:  'redis', 

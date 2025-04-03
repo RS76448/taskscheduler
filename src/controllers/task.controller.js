@@ -60,13 +60,14 @@ exports.createTask = async (req, res) => {
       user: req.user._id,
       status: 'created'
     });
+   
     
     // Save task to database
     task = await task.save();
     
     // Schedule the task
     task = await schedulerService.scheduleTask(task,req.user._id);
-    
+    console.log("scheduleType",scheduleType)
     logger.info(`Task ${task._id} created and scheduled by user ${req.user._id}`);
     
     res.status(201).json({

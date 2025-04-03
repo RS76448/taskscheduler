@@ -44,7 +44,7 @@ document.getElementById('create-task-form').addEventListener('submit', async fun
       });
       console.log('Response:', response); // Debugging line
       const result = await response.json();
-  
+      
       if (result.success) {
         // If task creation was successful
         alert('Task created successfully!');

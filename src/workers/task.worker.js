@@ -8,7 +8,8 @@ class TaskWorker {
   constructor() {
     this.taskQueue = new Bull('task-queue', {
       redis: {
-        host: 'redis',
+        host: process.env.REDIS_HOST || 'redis',
+        
         port: 6379,
         
       }

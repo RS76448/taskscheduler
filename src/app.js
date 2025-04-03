@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(morgan('combined', { stream: { write: message => logger.http(message.trim()) } }));
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect("mongodb+srv://amrohitk70:17299271@cluster0.0v55eii.mongodb.net/task-scheduler?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
     logger.info('Connected to MongoDB');
   })
@@ -55,7 +55,9 @@ mongoose.connect(process.env.MONGODB_URI)
 // API Routes
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', taskRoutes);
-
+app.get('/', (req, res) => {
+  res.redirect('/api/users/loginview'); // Redirect to login page
+});
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({

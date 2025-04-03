@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('loginButton').addEventListener('click', async () => {
+      if(localStorage.getItem('token')) {
+        location.href = '/api/users/profileview';
+        return;
+      }
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 

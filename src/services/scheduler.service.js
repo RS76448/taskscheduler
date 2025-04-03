@@ -8,8 +8,8 @@ class SchedulerService {
   constructor() {
     this.taskQueue = new Bull('task-queue', {
       redis: {
-        host: 'redis',
-        port: 6379
+        host: process.env.REDIS_HOST || 'localhost',
+        port: process.env.REDIS_PORT || 6379,
       }
     });
     
@@ -84,6 +84,7 @@ class SchedulerService {
       
       // Add job to queue
       await new Promise(resolve => setTimeout(resolve, 5000)); // 5-second delay
+      console.log("scheduleType","scheduleType1")
       const job = await this.taskQueue.add(
         { 
           taskId: task._id.toString(),
@@ -93,7 +94,7 @@ class SchedulerService {
         }, 
         jobOptions
       );
-      
+      console.log("scheduleType","scheduleType2")
       // Update task with job ID and status
       task.jobId = job.id.toString();
       task.status = 'scheduled';

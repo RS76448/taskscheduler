@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context : .
+      args:
+        - PLATFORM=linux/amd64
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/task-scheduler
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - JWT_SECRET=your_jwt_secret_key
+      - JWT_EXPIRES_IN=1d
+      - LOG_LEVEL=info
+      - TZ=Asia/Kolkata
+    # Optional: Volume to ensure the container's time syncs with the host system
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+  
+    depends_on:
+      - mongo
+      - redis
+    restart: no
+    
+
+  mongo:
+    image: mongo:4.4
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+  redis:
+    image: redis:6-alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    restart: always
+
+volumes:
+  mongo-data:
+  redis-data:
+
+networks:
+  taskscheduler_default:
+    external: true  # Use the already created external network

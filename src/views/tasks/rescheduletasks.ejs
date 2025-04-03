@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reschedule Task - My App</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Reschedule Task</h1>
+    
+    <% if (locals.error) { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    
+    <form action="/api/tasks/<%= task._id %>/reschedule" method="POST">
+      <div class="form-group">
+        <label for="scheduleTime">New Schedule Time</label>
+        <input type="datetime-local" id="scheduleTime" name="scheduleTime" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Reschedule</button>
+    </form>
+  </div>
+</body>
+</html>

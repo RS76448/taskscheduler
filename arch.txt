@@ -1,0 +1,26 @@
+# Task Scheduler Architecture
+
+## System Components
+1. **API Server**: Express.js server handling HTTP requests
+2. **Authentication Service**: JWT-based user authentication
+3. **Task Manager**: Core logic for creating and managing tasks
+4. **Scheduler Service**: Redis-based scheduling mechanism
+5. **Worker Process**: Background process executing scheduled tasks
+6. **Database**: Storing user accounts and task metadata
+7. **Redis**: Task queue, scheduling, and pub/sub communication
+
+## Data Flow
+1. User creates a task via API
+2. API validates the request and saves task metadata
+3. Scheduler adds the task to Redis with appropriate timing
+4. Worker process subscribes to Redis events
+5. When task time arrives, Redis publishes event
+6. Worker executes the task and updates task status
+7. User can query task status via API
+
+## Task Lifecycle
+```
+[Created] → [Scheduled] → [Pending] → [Running] → [Completed]/[Failed]
+                  ↓                       ↓
+             [Canceled]               [Retrying]
+```

@@ -1,0 +1,46 @@
+<!-- views/user/profile.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - My App</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    
+    
+    <div class="profile-container">
+      <h1>My Profile</h1>
+      
+      <% if (locals.error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+      
+      <div id="profile-data">
+        <div class="loading">Loading profile data...</div>
+      </div>
+      
+      <div class="profile-actions">
+        <!-- view all tasks of user -->
+      </br>
+    </br>
+  </br>
+        <!-- createing new tasks -->
+        
+        <a href="/api/tasks/createtaskview" class="btn btn-primary">Create New Task</a><br><br><br>
+        <a href="/api/tasks/gettaskview" class="btn btn-primary">View All Tasks</a><br><br><br>
+        <a href="/api/tasks/taskstatsview" class="btn btn-primary">View Task Stats</a><br><br>
+
+        </br>
+      </br>
+    </br>
+        <button id="logout-btn" class="btn btn-danger">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/profile.js"></script>
+</body>
+</html>

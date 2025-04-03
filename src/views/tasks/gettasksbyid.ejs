@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Details - My App</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Task Details</h1>
+    
+    <% if (locals.error) { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    
+    <div class="task-details">
+      <p><strong>Name:</strong> <%= task.name %></p>
+      <p><strong>Status:</strong> <%= task.status %></p>
+      <p><strong>Description:</strong> <%= task.description %></p>
+      <p><strong>Schedule Time:</strong> <%= task?.scheduleTime%></p>
+      <p><strong>Type:</strong> <%= task.type %></p>
+      <!-- <p><strong>Payload:</strong> <%= JSON.stringify(task.payload) %></p> -->
+      <p><strong>Max Retries:</strong> <%= task.maxRetries %></p>
+    </div>
+    
+    <div class="task-actions">
+      <% if (task.status !== "canceled") { %>
+        <a href="/api/tasks/<%= task._id %>/cancel" class="btn btn-danger">Cancel Task</a>
+        <a href="/api/tasks/<%= task._id %>/rescheduleview" class="btn btn-warning">Reschedule Task</a>
+      <% } %>
+      
+    </div>
+  </div>
+</body>
+</html>

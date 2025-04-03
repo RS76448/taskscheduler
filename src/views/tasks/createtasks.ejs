@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Task - My App</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="task-form">
+      <h1>Create New Task</h1>
+      
+      <% if (locals.error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+      <div class="alert alert-success" id="success-message" style="display: none;" id="message"></div>
+      <form id="create-task-form">
+        <div class="form-group">
+          <label for="name">Task Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="type">Task Type</label>
+          <select id="type" name="type" required>
+            <option value="email">email</option>
+            <option value="notification">notification</option>
+            <option value="log">log</option>
+            <option value="http_request">http_request</option>
+            <option value="custom">custom</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="scheduleType">Schedule Type</label>
+          <select id="scheduleType" name="scheduleType" required>
+            <option value="specific_time">Specific Time</option>
+            <option value="recurring">Recurring</option>
+            <option value="delay">Delay</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="scheduleTime">Schedule Time</label>
+          <input type="datetime-local" id="scheduleTime" name="scheduleTime">
+        </div>
+
+        <div class="form-group">
+          <label for="cronExpression">Cron Expression (for recurring tasks)</label>
+          <input type="text" id="cronExpression" name="cronExpression">
+        </div>
+        
+        <div class="form-group">
+          <label for="maxRetries">Max Retries</label>
+          <input type="number" id="maxRetries" name="maxRetries" min="1" value="3">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Task</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/createTask.js"></script>
+</body>
+</html>

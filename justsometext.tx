@@ -1,1 +1,15 @@
 redis://default:1w3ZXZ9sKGqkash28K9k1pPEGjdNsVVh@redis-11513.c277.us-east-1-3.ec2.redns.redis-cloud.com:11513
+
+heroku config:set REDIS_HOST="redis://default:1w3ZXZ9sKGqkash28K9k1pPEGjdNsVVh@redis-11513.c277.us-east-1-3.ec2.redns.redis-cloud.com:11513" -a taskschedulerappp
+heroku config:set REDIS_PORT=6379 -a taskschedulerappp
+
+
+MONGODB_URI=mongodb+srv://amrohitk70:17299271@cluster0.0v55eii.mongodb.net/task-scheduler?retryWrites=true&w=majority&appName=Cluster0
+heroku config:set MONGODB_URI=mongodb+srv://amrohitk70:17299271@cluster0.0v55eii.mongodb.net/task-scheduler?retryWrites=true&w=majority&appName=Cluster0 -a taskschedulerappp
+
+
+heroku config:set REDIS_HOST_CLOUD="redis-11513.c277.us-east-1-3.ec2.redns.redis-cloud.com" -a taskschedulerappp
+
+heroku config:set REDIS_PORT_CLOUD=11513 -a taskschedulerappp
+
+heroku config:set REDIS_PASSWORD_CLOUD="1w3ZXZ9sKGqkash28K9k1pPEGjdNsVVh" -a taskschedulerappp

@@ -24,10 +24,10 @@ class RedisService {
       url: config.REDISCLOUD_URL
     });
     
-  console.log("client=====>",{ host:  'redis', 
-    port:  6379})
+  // console.log("client=====>",{ host:  'redis', 
+  //   port:  6379})
   
-  console.log("config",config)
+  // console.log("config",config)
     try {
       await client.connect(); // Ensure connection before returning
       // console.log("🔗 Connected to Redis!");

@@ -5,6 +5,7 @@ const logger = require('../utils/logger');
 
 // Create a new task
 exports.createTask = async (req, res) => {
+ console.log("createTask",req.body)
   try {
     const { 
       name, 
@@ -14,10 +15,20 @@ exports.createTask = async (req, res) => {
       scheduleType, 
       scheduleTime, 
       cronExpression,
-      maxRetries 
+      maxRetries,
+      delayMs
     } = req.body;
-    
+    // console.log("createTask",req)
     // Validate required fields
+    let newpayload = payload;
+    if(newpayload && typeof newpayload == 'object') {
+      newpayload =JSON.parse(JSON.stringify(newpayload))
+      newpayload.delayMs = delayMs || 0;
+    }else{
+      newpayload = {}
+      newpayload.delayMs = delayMs || 0;
+    }
+    console.log("newpayload",newpayload)
     if (!name || !type || !scheduleType) {
       return res.status(400).json({
         success: false,
@@ -41,18 +52,19 @@ exports.createTask = async (req, res) => {
     }
     
     // Calculate schedule time for delay type
-    let finalScheduleTime = scheduleTime;
+    let finalScheduleTime = new Date(scheduleTime);
     if (scheduleType === 'delay') {
-      const delayMs = payload?.delayMs || 0;
-      finalScheduleTime = new Date(Date.now() + delayMs);
+      const delayMsIN = delayMs || 0;
+      finalScheduleTime = new Date(finalScheduleTime.getTime() + delayMsIN);
     }
-    
+    console.log("finalScheduleTime",finalScheduleTime)
     // Create task
     let task = new Task({
       name,
       description,
       type,
-      payload: payload || {},
+      
+      payload: newpayload || {},
       scheduleType,
       scheduleTime: finalScheduleTime,
       cronExpression,
@@ -274,8 +286,8 @@ exports.getTaskStats = async (req, res) => {
     
     // Add queue stats
     const queueStats = await schedulerService.getQueueStatistics();
-    console.log("queueStats",queueStats)
-    console.log("statsObj",statsObj)
+    // console.log("queueStats",queueStats)
+    // console.log("statsObj",statsObj)
     res.status(200).json({
       success: true,
       taskStats: statsObj,

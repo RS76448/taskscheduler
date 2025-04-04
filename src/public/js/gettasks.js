@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         row.innerHTML = `
           <td>${task.name}</td>
           <td>${task.status}</td>
-          <td>${task.scheduleType === "specific_time" ? new Date(task.scheduleTime).toLocaleString() : "N/A"}</td>
+          <td>${new Date(task.scheduleTime).toLocaleString() }</td>
           <td>${new Date(task.createdAt).toLocaleString()}</td>
           <td>${task.description}</td>
           <td>${task.scheduleType}</td>

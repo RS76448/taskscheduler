@@ -17,10 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     // Fetch task data
-    fetch(`/api/tasks/${taskId}`,{
-        method: "GET",
-        headers: { "Authorization": `Bearer ${token}` }
-      })
+    fetch(`/api/tasks/${taskId}`, {
+    
+      headers: { "Authorization": `Bearer ${token}` },
+     
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch task details');

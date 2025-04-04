@@ -57,14 +57,16 @@ class SchedulerService {
       
       // Calculate delay for the task
       let delay = 0;
-      
+      const scheduleTime = new Date(task.scheduleTime);
       if (task.scheduleType === 'delay') {
         // Delay is in milliseconds from now
+        
         delay = task.payload.delayMs || 0;
+
       } else if (task.scheduleType === 'specific_time') {
         // Calculate milliseconds until the specific time
         const now = new Date();
-        const scheduleTime = new Date(task.scheduleTime);
+        
         delay = scheduleTime.getTime() - now.getTime();
         
         // If time is in the past, execute immediately

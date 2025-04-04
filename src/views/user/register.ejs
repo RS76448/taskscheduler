@@ -15,7 +15,7 @@
         <div class="alert alert-danger"><%= error %></div>
       <% } %>
       
-      <form action="/api/users/register" method="POST">
+      <form >
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" name="username" required>
@@ -45,55 +45,6 @@
     </div>
   </div>
 
-  <script>
-    document.querySelector('form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      // Form validation
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      
-      if (password !== confirmPassword) {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'alert alert-danger';
-        errorDiv.textContent = 'Passwords do not match';
-        document.querySelector('.auth-form').insertBefore(errorDiv, document.querySelector('form'));
-        return;
-      }
-      
-      // Prepare data
-      const formData = {
-        username: document.getElementById('username').value,
-        email: document.getElementById('email').value,
-        password: password
-      };
-      
-      try {
-        const response = await fetch('/api/users/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-          // Store token and redirect
-          localStorage.setItem('token', data.token);
-          window.location.href = '/profile';
-        } else {
-          // Display error
-          const errorDiv = document.createElement('div');
-          errorDiv.className = 'alert alert-danger';
-          errorDiv.textContent = data.message || 'Registration failed';
-          document.querySelector('.auth-form').insertBefore(errorDiv, document.querySelector('form'));
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    });
-  </script>
+ <script src="/js/register.js"></script>
 </body>
 </html>

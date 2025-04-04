@@ -4,15 +4,15 @@ const logger = require('../utils/logger');
 const redisService = require('../services/redis.service');
 const taskModel = require('../models/task.model');
 const { default: mongoose } = require('mongoose');
+const config = require('../config/config');
 class TaskWorker {
   constructor() {
     this.taskQueue = new Bull('task-queue', {
       redis: {
-        host: process.env.REDIS_HOST || 'redis',
-        
-        port: 6379,
-        
-      }
+        host: config.REDISCLOUD_HOST,  // Extracted from the URL
+        port: config.REDISCLOUD_PORT,  // Port from the URL
+        password: config.REDISCLOUD_PASSWORD,  // Extracted from the URL// Extracted from the URL
+    }
     });
   }
   async marktaskascompleted(id,taskId, result) {
@@ -41,7 +41,7 @@ class TaskWorker {
       // Process tasks from the queue
       this.taskQueue.process(async (job) => {
         //just added this to show active tasks in taskstats
-        await new Promise(resolve => setTimeout(resolve, 10000)); // 10-second delay
+        // await new Promise(resolve => setTimeout(resolve, 10000)); // 10-second delay
         const { taskId, type, payload } = job.data;
         console.log('job data', job);
         const {id}=job

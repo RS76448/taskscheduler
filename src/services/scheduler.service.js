@@ -3,14 +3,15 @@ const Bull = require('bull');
 const logger = require('../utils/logger');
 const Task = require('../models/task.model');
 const redisService = require('./redis.service');
-
+const config = require('../config/config');
 class SchedulerService {
   constructor() {
     this.taskQueue = new Bull('task-queue', {
       redis: {
-        host: process.env.REDIS_HOST || 'localhost',
-        port: process.env.REDIS_PORT || 6379,
-      }
+        host: config.REDISCLOUD_HOST,  // Extracted from the URL
+        port: config.REDISCLOUD_PORT,  // Port from the URL
+        password: config.REDISCLOUD_PASSWORD,  // Extracted from the URL
+    }
     });
     
     this.initialized = false;
@@ -83,7 +84,7 @@ class SchedulerService {
       };
       
       // Add job to queue
-      await new Promise(resolve => setTimeout(resolve, 5000)); // 5-second delay
+      // await new Promise(resolve => setTimeout(resolve, 5000)); // 5-second delay
       console.log("scheduleType","scheduleType1")
       const job = await this.taskQueue.add(
         { 

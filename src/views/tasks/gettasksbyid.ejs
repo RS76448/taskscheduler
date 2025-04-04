@@ -5,32 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Details - My App</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-YUe2LzesAfftltw+PEaao2tjU/QATaW/rOitAq67e0CT0Zi2VVRL0oC4+gAaeBKu" crossorigin="anonymous"></script>
+
 </head>
 <body>
   <div class="container">
     <h1>Task Details</h1>
     
-    <% if (locals.error) { %>
-      <div class="alert alert-danger"><%= error %></div>
-    <% } %>
+    <div id="error-container" class="alert alert-danger" style="display: none;"></div>
     
-    <div class="task-details">
-      <p><strong>Name:</strong> <%= task.name %></p>
-      <p><strong>Status:</strong> <%= task.status %></p>
-      <p><strong>Description:</strong> <%= task.description %></p>
-      <p><strong>Schedule Time:</strong> <%= task?.scheduleTime%></p>
-      <p><strong>Type:</strong> <%= task.type %></p>
-      <!-- <p><strong>Payload:</strong> <%= JSON.stringify(task.payload) %></p> -->
-      <p><strong>Max Retries:</strong> <%= task.maxRetries %></p>
+    <div id="loading" class="loading-indicator">Loading task details...</div>
+    
+    <div id="task-details" class="task-details" style="display: none;">
+      <p><strong>Name:</strong> <span id="task-name"></span></p>
+      <p><strong>Status:</strong> <span id="task-status"></span></p>
+      <p><strong>Description:</strong> <span id="task-description"></span></p>
+      <p><strong>Schedule Time:</strong> <span id="task-schedule-time"></span></p>
+      <p><strong>Type:</strong> <span id="task-type"></span></p>
+      <!-- <p><strong>Payload:</strong> <span id="task-payload"></span></p> -->
+      <p><strong>Max Retries:</strong> <span id="task-max-retries"></span></p>
     </div>
     
-    <div class="task-actions">
-      <% if (task.status !== "canceled") { %>
-        <a href="/api/tasks/<%= task._id %>/cancel" class="btn btn-danger">Cancel Task</a>
-        <a href="/api/tasks/<%= task._id %>/rescheduleview" class="btn btn-warning">Reschedule Task</a>
-      <% } %>
-      
+    <div id="task-actions" class="task-actions container row" style="display: none; width: 10%;">
+      <a href="#" id="cancel-task-btn" class="btn btn-danger col-12">Cancel Task</a>
+      <a href="#" id="reschedule-task-btn" class="btn btn-warning col-12">Reschedule Task</a>
+      <a href="/api/tasks/gettaskview" class="btn btn-secondary col-12">Back to Task List</a>
+     
     </div>
+    
+   
   </div>
+
+  <script src="/js/gettaskbyid.js"></script>
 </body>
 </html>

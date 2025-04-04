@@ -2,7 +2,7 @@
 const Redis = require('redis');
 const { promisify } = require('util');
 const logger = require('../utils/logger');
-
+const config = require('../config/config');
 class RedisService {
   constructor() {
     this.client = null;
@@ -21,8 +21,7 @@ class RedisService {
   }
   async createredisclient() {
     const client = Redis.createClient({
-      url: process.env.REDISCLOUD_URL
-      // url:process.env.REDIS_URL || 'redis://redis:6379',
+      url: config.REDISCLOUD_URL
     });
     
   console.log("client=====>",{ host:  'redis', 

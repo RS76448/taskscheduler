@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
     logger.info(`New user registered: ${email}`);
     
     // Return user data and token
-    res.status(201).json({
+    return res.json({
       success: true,
       token,
       user: {

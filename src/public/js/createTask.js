@@ -72,3 +72,4 @@ document.getElementById('create-task-form').addEventListener('submit', async fun
     }
   });
 })
+

@@ -4,98 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Tasks - Infinite Scroll</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-    }
-    #load-more-trigger {
-  height: 20px;
-  width: 100%;
-  margin-top: 10px;
-  background: transparent;
-}
-    .container {
-      width: 80%;
-      max-width: 900px;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      margin-top: 50px;
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    .task-list {
-      width: 100%;
-      max-height: 80vh; /* Enough height to enable scrolling */
-      overflow-y: auto;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    .task-list th, .task-list td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-
-    .task-list th {
-      background-color: #007bff;
-      color: white;
-    }
-
-    .task-list tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    .task-list tr:hover {
-      background-color: #f1f1f1;
-    }
-
-    /* Infinite Scroll Loader */
-    .loader {
-      text-align: center;
-      margin: 20px;
-      font-weight: bold;
-      color: #007bff;
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-YUe2LzesAfftltw+PEaao2tjU/QATaW/rOitAq67e0CT0Zi2VVRL0oC4+gAaeBKu" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>My Tasks</h1>
-    <table class="task-list">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Status</th>
-          <th>Schedule Time</th>
-          <th>Created At</th>
-          <th>Description</th>
-          <th>Schedule Type</th>
-          <th>Errors</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="task-body">
-        <!-- Tasks will be loaded dynamically -->
-      </tbody>
-    </table>
+  <div class="container mt-4">
+    <h1 class="mb-4">My Tasks</h1>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Schedule Time</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Description</th>
+            <th scope="col">Schedule Type</th>
+            <th scope="col">Errors</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="task-body" class="align-middle">
+          <!-- Tasks will be loaded dynamically -->
+        </tbody>
+      </table>
+    </div>
 
-    <div id="pagination-info" class="loader">Loading more tasks...</div>
+    <div id="pagination-info" class="text-center my-4 text-muted">Loading more tasks...</div>
 
     <!-- Trigger for Infinite Scroll -->
-    <div id="load-more-trigger"></div>
+    <div id="load-more-trigger" class="mb-4"></div>
   </div>
 
   <script src="/js/gettasks.js"></script>

@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <td>${task.scheduleType}</td>
           <td>${task.error ? task.error : "None"}</td>
           <td>
-            <a href="/api/tasks/${task._id}">View</a> |
+            <a href="/api/tasks/view/${task._id}">View</a> |
             ${(task.status !== "canceled"||task.status !== "completed") ? `<a href="/api/tasks/${task._id}/cancel">Cancel</a> |` : ""}
              ${(task.status !== "canceled"||task.status !== "completed") ? ` <a href="/api/tasks/${task._id}/rescheduleview">Reschedule</a> |` : ""}
            
